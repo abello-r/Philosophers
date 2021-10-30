@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 15:55:56 by abello-r          #+#    #+#             */
-/*   Updated: 2021/09/01 19:34:36 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/10/15 14:28:32 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@ static int	ft_no_philo(char **argv)
 	if (value == 0)
 	{
 		write(1, RED NARG, (sizeof(NARG) + sizeof(RED) - 2));
+		return (-1);
+	}
+	else if (value > 200)
+	{
+		write(1, RED MARG, (sizeof(MARG) + sizeof(RED) - 2));
 		return (-1);
 	}
 	return (0);
@@ -45,7 +50,7 @@ static int	ft_parse(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_pa	**pa;
+	t_global	global;
 
 // Parse finish --------------------------------------
 
@@ -58,13 +63,17 @@ int	main(int argc, char **argv)
 		if (ft_parse(argc, argv) == -1)
 			return (-1);
 
+	ft_fill_struct(argc, argv, &global);
+
 // Create struct x philo-------------------------------
 
-	pa = malloc(sizeof(t_pa *) * ft_atoi(argv[1]));
+	global.philo = malloc(sizeof(t_global) * ft_atoi(argv[1]));
 
-	ft_fill_structs(pa, argc, argv); // Fill all structs
-	ft_print_data(pa, argv); // Test 
-	//ft_thread_x_philo(pa); // Create a new thread x philo
+	if (!global.philo)
+		return (1);
+
+	ft_init_struct(&global);
+	ft_create_threads(&global);
 
 	return (0);
 }

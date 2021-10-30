@@ -2,7 +2,10 @@ SRCS =	srcs/basic_utils.c \
 		srcs/conversion_utils.c \
 		srcs/main.c \
 		srcs/memory_utils.c \
-		srcs/test_utils.c
+		srcs/test_utils.c \
+		srcs/time_utils.c \
+		srcs/rutine.c \
+		srcs/mutex_and_forks.c
 
 OBJS = ${SRCS:.c=.o}
 
@@ -23,7 +26,7 @@ all:	${NAME}
 
 clean:
 		@echo "\n\033[32mJunk files deleted\n"
-		@${RM} ${OBJS}
+		@${RM} ${OBJS} philo.dSYM
 		@${RM} objs
 
 fclean:	clean

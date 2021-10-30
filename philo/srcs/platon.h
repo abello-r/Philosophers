@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+ /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   platon.h                                           :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 15:39:20 by abello-r          #+#    #+#             */
-/*   Updated: 2021/09/01 19:28:13 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/09/27 18:37:57 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@
 # define MAX_INT 2147483647
 # define MIN_INT -2147483648
 
-
 /** Colorize output **/
 # define GREEN "\033[1;32m"
 # define RED "\033[1;31m"
@@ -59,34 +58,82 @@
 /** Arguments Error **/
 # define LARG "\nInvalid Arguments\n\n"
 # define NARG "\nThe number of philos cannot be 0\n\n"
+# define MARG "\nThe number of philos cannot be major than 200\n\n"
 # define PARSE "\nInvalid Character\n\n"
 
 /** Struct Value arguments **/
-typedef	struct	s_pa
-{
-	pthread_t	*philo;
-	int			philo_num;
-	uint64_t	t_2_eat;
-	uint64_t	t_2_die;
-	uint64_t	t_2_sleep;
-	bool		eat_flag;
-	int			c_2_eat;
-	int			index;
-}				t_pa;
 
-/** Conversion functions **/
+typedef struct	s_args
+{
+	uint64_t		start_time;
+
+	int				total_philos;
+	int				time_2_die;
+	int				time_2_eat;
+	int				time_2_sleep;
+	int				limit_eat;
+
+	int				meteorite;
+	int				stop;
+
+	pthread_mutex_t	end_mutex;
+	pthread_mutex_t write_mutex;
+	pthread_mutex_t t_eat_mutex;
+	pthread_mutex_t dead_mutex;
+
+}				t_args;
+
+typedef struct s_philo
+{
+	t_args					*args;
+	
+	uint64_t				eating_time;
+	uint64_t				eat_count;
+	
+	pthread_mutex_t			*own_fork;
+	pthread_mutex_t			left_fork;
+
+	pthread_t				thread;
+
+	int			end;
+	int			index;
+
+}				t_philo;
+
+typedef struct 	s_global
+{
+	t_philo		*philo;
+	t_args		args;
+
+}							t_global;
+
+
+
+
+
+
+int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 
-/** Memory functions **/
-void	ft_bzero(void *s, size_t n);
+int		ft_init_struct(t_global *global);
+int		ft_fill_struct(int argc, char **argv, t_global *global);
 
-/** Basic functions **/
-int		ft_isdigit(int c);
-void	ft_fill_structs(t_pa **pa, int argc, char **argv);
+void	ft_init_mutex(t_global *global);
+int		ft_assigns_forks(t_global *global, int i);
 
-int		ft_thread_x_philo(t_pa *pa);
+uint64_t	ft_get_time(uint64_t reference);
+void		ft_usleep(uint64_t time_in_ms);
 
-/** Test functions **/
-void	ft_print_data(t_pa **pa, char **argv);
+int		ft_create_threads(t_global *global);
+void	*ft_loop(void *values);
+int		supervisor(t_philo *philo, int i);
+void	ft_rutine(t_philo *philo);
+
+void	ft_take_a_fork(t_philo *philo);
+void	ft_show_condition(t_philo *philo, char *condition);
+
+
+
+
 
 #endif
