@@ -6,18 +6,11 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 16:20:29 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/12 18:58:25 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/13 00:19:55 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "platon.h"
-
-void	ft_take_a_fork(t_philo *philo)
-{
-	pthread_mutex_lock(&philo->args->write_mutex);
-	ft_show_condition(philo, "Has taken fork\n");
-	pthread_mutex_unlock(&philo->args->write_mutex);
-}
 
 void	ft_show_condition(t_philo *philo, char *condition)
 {
@@ -35,12 +28,18 @@ void	*ft_loop(void *values)
 	t_philo	*philo;
 
 	philo = (t_philo *)values;
+
 	if (philo->index % 2 == 0)
 		ft_usleep(philo->args->time_2_eat);
 
 	while (1)
 	{
 		ft_eat(philo);
+
+		pthread_mutex_lock(&philo->args->write_mutex); // Bloquear mutex escritura
+		printf(YELLOW "[%llu ms]\t\t[Philo %d] Is sleeping\n" RESET, ft_get_time(philo->args->start_time), philo->index); // Escribir que tiene [1] tenedor y restar el tiempo inicial con el actual.
+		pthread_mutex_unlock(&philo->args->write_mutex); // Bloquear mutex escritura
+		ft_usleep(philo->args->time_2_sleep);
 		/*
 			mutex lock write
 			Imprimir mensaje de dormir
@@ -54,7 +53,6 @@ void	*ft_loop(void *values)
 			mutex unlock write
 		*/
 	}
-
 	return (0);
 }
 

@@ -6,11 +6,19 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 16:21:20 by abello-r          #+#    #+#             */
-/*   Updated: 2021/08/31 14:48:10 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/12 21:15:00 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "platon.h"
+
+int	ft_isdigit(int c)
+{
+	if (c >= '0' && c <= '9')
+		return (1);
+	write(1, RED PARSE, (sizeof(PARSE) + sizeof(RED) - 2));
+	return (0);
+}
 
 int	ft_atoi(const char *str)
 {

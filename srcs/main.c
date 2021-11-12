@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 15:55:56 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/12 19:04:39 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/13 00:10:22 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ int	main(int argc, char **argv)
 
 // Create struct x philo-------------------------------
 
-	global.philo = malloc(sizeof(t_global) * ft_atoi(argv[1]));
+	global.philo = malloc(sizeof(t_philo) * ft_atoi(argv[1]));
 
 	if (!global.philo)
 		return (1);

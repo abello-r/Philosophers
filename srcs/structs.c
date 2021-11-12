@@ -1,24 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   basic_utils.c                                      :+:      :+:    :+:   */
+/*   structs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 18:09:55 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/11 19:08:11 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/13 00:19:13 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "platon.h"
-
-int	ft_isdigit(int c)
-{
-	if (c >= '0' && c <= '9')
-		return (1);
-	write(1, RED PARSE, (sizeof(PARSE) + sizeof(RED) - 2));
-	return (0);
-}
 
 int	ft_fill_struct(int argc, char **argv, t_global *global)
 {
