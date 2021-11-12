@@ -5,7 +5,8 @@ SRCS =	srcs/basic_utils.c \
 		srcs/test_utils.c \
 		srcs/time_utils.c \
 		srcs/rutine.c \
-		srcs/mutex_and_forks.c
+		srcs/mutex_and_forks.c \
+		srcs/philo_condition.c
 
 OBJS = ${SRCS:.c=.o}
 

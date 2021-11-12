@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 18:09:55 by abello-r          #+#    #+#             */
-/*   Updated: 2021/10/15 15:55:44 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/11 19:08:11 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,11 @@ int	ft_init_struct(t_global *global)
 
 	while (i < global->args.total_philos)
 	{
+		pthread_mutex_init(&global->philo[i].own_fork, NULL);
 		global->philo[i].eating_time = global->args.start_time;
 		global->philo[i].eat_count = 0;
 		global->philo[i].end = 0;
 		global->philo[i].index = i + 1;
-
-		if (ft_assigns_forks(global, i) == 1)
-			return (1);
 		i++;
 	}
 	return (1);

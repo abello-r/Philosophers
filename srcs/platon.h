@@ -89,10 +89,8 @@ typedef struct s_philo
 	
 	uint64_t				eating_time;
 	uint64_t				eat_count;
-	
-	pthread_mutex_t			*own_fork;
-	pthread_mutex_t			left_fork;
 
+	pthread_mutex_t			own_fork;
 	pthread_t				thread;
 
 	int			end;
@@ -107,11 +105,6 @@ typedef struct 	s_global
 
 }							t_global;
 
-
-
-
-
-
 int		ft_isdigit(int c);
 int		ft_atoi(const char *str);
 
@@ -119,21 +112,22 @@ int		ft_init_struct(t_global *global);
 int		ft_fill_struct(int argc, char **argv, t_global *global);
 
 void	ft_init_mutex(t_global *global);
-int		ft_assigns_forks(t_global *global, int i);
 
 uint64_t	ft_get_time(uint64_t reference);
 void		ft_usleep(uint64_t time_in_ms);
 
 int		ft_create_threads(t_global *global);
 void	*ft_loop(void *values);
-int		supervisor(t_philo *philo, int i);
 void	ft_rutine(t_philo *philo);
 
 void	ft_take_a_fork(t_philo *philo);
 void	ft_show_condition(t_philo *philo, char *condition);
 
 
+// Condition
 
+void	*ft_philo_dead(void *values);
+void	ft_eat(t_philo *philo);
 
 
 #endif
