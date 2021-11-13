@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 16:20:29 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 18:42:50 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/13 19:04:20 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*ft_loop(void *values)
 	philo = (t_philo *)values;
 
 	if (philo->index % 2 == 0)
-		ft_usleep(1000);
+		usleep(1000);
 
 	while (1)
 	{
@@ -47,6 +47,9 @@ void	*ft_loop(void *values)
 			esperar tiempo que tarda en dormir [paramatro sleep]
 		*/
 
+		pthread_mutex_lock(&philo->table->write_mutex); // Bloquear mutex escritura
+		printf(MAGN "[%llu ms]\t\t[Philo %d] Is thinking\n" RESET, ft_get_time(philo->table->start_time), philo->index); // Escribir que tiene [1] tenedor y restar el tiempo inicial con el actual.
+		pthread_mutex_unlock(&philo->table->write_mutex); // Bloquear mutex escritura
 		/*
 			mutex lock write
 			Imprimir mensaje de pensando
