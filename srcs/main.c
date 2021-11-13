@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 15:55:56 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 10:21:14 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/13 18:11:11 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	ft_parse(int argc, char **argv)
 
 int	main(int argc, char **argv)
 {
-	t_global	global;
+	t_table	table;
 
 // Parse finish --------------------------------------
 
@@ -63,17 +63,17 @@ int	main(int argc, char **argv)
 		if (ft_parse(argc, argv) == -1)
 			return (-1);
 
-	ft_fill_struct(argc, argv, &global);
+	ft_fill_struct(argc, argv, &table);
 
 // Create struct x philo-------------------------------
 
-	global.philo = malloc(sizeof(t_philo) * ft_atoi(argv[1]));
+	table.philo = malloc(sizeof(t_philo) * ft_atoi(argv[1]));
 
-	if (!global.philo)
+	if (!table.philo)
 		return (1);
 
-	ft_init_struct(&global);
-	ft_create_threads(&global);
+	ft_init_struct(&table);
+	ft_create_threads(&table);
 
 	return (0);
 }

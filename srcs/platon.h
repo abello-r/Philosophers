@@ -63,8 +63,10 @@
 # define MARG "\nThe number of philos cannot be major than 200\n\n"
 # define PARSE "\nInvalid Character\n\n"
 
+typedef struct s_philo	t_philo;
+
 /*** [ Table ] ********************************************/
-/**/	typedef struct	s_args							/**/
+/**/	typedef struct	s_table							/**/
 /**/	{												/**/
 /**/		uint64_t		start_time;					/**/
 /**/		int				total_philos;				/**/
@@ -73,16 +75,17 @@
 /**/		int				time_2_sleep;				/**/
 /**/		int				limit_eat;					/**/
 /**/													/**/
+/**/		t_philo			*philo;						/**/
 /**/		pthread_mutex_t write_mutex;				/**/
 /**/													/**/
-/**/	}				t_args;							/**/
+/**/	}				t_table;						/**/
 /**********************************************************/
 
 
 /*** [ Struct by philo ] **********************************/
 /**/	typedef struct s_philo							/**/
 /**/	{												/**/
-/**/		t_args					*args;				/**/
+/**/		t_table					*table;				/**/
 /**/													/**/
 /**/		pthread_mutex_t			own_fork;			/**/
 /**/		pthread_t				thread;				/**/
@@ -91,17 +94,6 @@
 /**/													/**/
 /**/	}				t_philo;						/**/
 /**********************************************************/
-
-
-/*** [ Global struct ] ************************************/
-/**/	typedef struct 	s_global						/**/
-/**/	{												/**/
-/**/		t_philo		*philo;							/**/
-/**/		t_args		args;							/**/
-/**/													/**/
-/**/	}							t_global;			/**/
-/**********************************************************/
-
 
 
 
@@ -118,18 +110,18 @@
 
 
 	/***[ STRUCTS.C ] functions *****************************************************/
-	/**/int			ft_fill_struct(int argc, char **argv, t_global *global);	 /**/
-	/**/int			ft_init_struct(t_global *global);							/**/
+	/**/int			ft_fill_struct(int argc, char **argv, t_table *table);	 /**/
+	/**/int			ft_init_struct(t_table *table);							/**/
 	/*****************************************************************************/
 
 
 	/***[ INIT_MUTEX.C ] functions *******************************/
-	/**/void		ft_init_mutex(t_global *global);		  /**/
+	/**/void		ft_init_mutex(t_table *global);		  /**/
 	/***********************************************************/
 
 	
 	/***[ RUTINE.C ] functions ************************************/
-	/**/int			ft_create_threads(t_global *global); 	   /**/
+	/**/int			ft_create_threads(t_table *global); 	   /**/
 	/**/void		*ft_loop(void *values);					  /**/
 	/**/void		ft_rutine(t_philo *philo);		   		 /**/
 	/**********************************************************/
