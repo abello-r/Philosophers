@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 19:08:21 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 00:17:06 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/13 10:50:29 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,6 @@ void	ft_take_a_fork(t_philo *philo)
 void	ft_eat(t_philo *philo)
 {
 	unsigned int	right_index; // Auxiliar philo index
-
-	if (philo->args->meteorite) // ¿ Está alguno muerto ?
-		return ;
 
 	right_index = philo->index; // Valor por defecto
 

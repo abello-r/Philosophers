@@ -1,29 +1,25 @@
-SRCS =	srcs/structs.c \
-		srcs/conversion_utils.c \
+NAME = platon.a
+
+SRCS=	srcs/structs.c \
+		srcs/mini_libft.c \
 		srcs/main.c \
-		srcs/memory_utils.c \
 		srcs/ft_eat.c \
 		srcs/time_utils.c \
 		srcs/rutine.c \
-		srcs/mutex_and_forks.c \
-		srcs/philo_condition.c
+		srcs/init_mutex.c
 
-OBJS = ${SRCS:.c=.o}
-
-NAME = platon.a
+OBJ= ${SRCS:.c=.o}
 
 CC = gcc
-
 RM = rm -rf
-
 CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
 
-${NAME}:	${OBJS}
-			${CC} ${CFLAGS} ${SRCS} -o philo
-			@mkdir objs
-			@mv ${OBJS} objs
+.c.o:
+		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}
 
-.PHONY: re fclean clean all
+${NAME}:	${OBJ}
+			@ar -rc ${NAME} ${OBJ}
+			${CC} $(CFLAGS) ${SRCS} -o philo
 
 all:	${NAME}
 
@@ -34,6 +30,8 @@ clean:
 fclean:	clean
 		@${RM} ${NAME}
 		@${RM} philo
-		@${RM} objs
+		@${RM} srcs/*.o
 
 re: fclean all
+
+.PHONY: re fclean clean all

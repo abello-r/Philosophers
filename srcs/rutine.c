@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 16:20:29 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 00:19:55 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/13 09:56:45 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	*ft_loop(void *values)
 	philo = (t_philo *)values;
 
 	if (philo->index % 2 == 0)
-		ft_usleep(philo->args->time_2_eat);
+		ft_usleep(1);
 
 	while (1)
 	{

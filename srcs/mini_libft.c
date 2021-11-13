@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   conversion_utils.c                                 :+:      :+:    :+:   */
+/*   mini_libft.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 16:21:20 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/12 21:15:00 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/13 09:54:51 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,22 @@ int	ft_atoi(const char *str)
 		i++;
 	}
 	return (nb * sign);
+}
+
+static void	*ft_memset(void *b, int c, size_t len)
+{
+	size_t i;
+
+	i = 0;
+	while (i < len)
+	{
+		((char *)b)[i] = (unsigned int)c;
+		i++;
+	}
+	return (b);
+}
+
+void	ft_bzero(void *s, size_t n)
+{
+	ft_memset(s, n, 0);
 }

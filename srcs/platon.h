@@ -63,73 +63,83 @@
 # define MARG "\nThe number of philos cannot be major than 200\n\n"
 # define PARSE "\nInvalid Character\n\n"
 
-/** Struct Value arguments **/
+/*** [ Table ] ********************************************/
+/**/	typedef struct	s_args							/**/
+/**/	{												/**/
+/**/		uint64_t		start_time;					/**/
+/**/		int				total_philos;				/**/
+/**/		int				time_2_die;					/**/
+/**/		int				time_2_eat;					/**/
+/**/		int				time_2_sleep;				/**/
+/**/		int				limit_eat;					/**/
+/**/													/**/
+/**/		pthread_mutex_t write_mutex;				/**/
+/**/													/**/
+/**/	}				t_args;							/**/
+/**********************************************************/
 
-typedef struct	s_args
-{
-	uint64_t		start_time;
 
-	int				total_philos;
-	int				time_2_die;
-	int				time_2_eat;
-	int				time_2_sleep;
-	int				limit_eat;
+/*** [ Struct by philo ] **********************************/
+/**/	typedef struct s_philo							/**/
+/**/	{												/**/
+/**/		t_args					*args;				/**/
+/**/													/**/
+/**/		pthread_mutex_t			own_fork;			/**/
+/**/		pthread_t				thread;				/**/
+/**/													/**/
+/**/		int			index;							/**/
+/**/													/**/
+/**/	}				t_philo;						/**/
+/**********************************************************/
 
-	int				meteorite;
-	int				stop;
 
-	pthread_mutex_t	end_mutex;
-	pthread_mutex_t write_mutex;
-	pthread_mutex_t t_eat_mutex;
-	pthread_mutex_t dead_mutex;
+/*** [ Global struct ] ************************************/
+/**/	typedef struct 	s_global						/**/
+/**/	{												/**/
+/**/		t_philo		*philo;							/**/
+/**/		t_args		args;							/**/
+/**/													/**/
+/**/	}							t_global;			/**/
+/**********************************************************/
 
-}				t_args;
 
-typedef struct s_philo
-{
-	t_args					*args;
+
+
+	/***[ MINI_LIBFT.C ] functions ****************************/
+	/**/int			ft_atoi(const char *str);    	 	   /**/
+	/**/int			ft_isdigit(int c);				      /**/
+	/*******************************************************/
+
+
+	/***[ TIME_UTILS.C ] functions ********************************/
+	/**/uint64_t	ft_get_time(uint64_t reference);	 	   /**/	
+	/**/void		ft_usleep(uint64_t time_in_ms);			  /**/
+	/***********************************************************/
+
+
+	/***[ STRUCTS.C ] functions *****************************************************/
+	/**/int			ft_fill_struct(int argc, char **argv, t_global *global);	 /**/
+	/**/int			ft_init_struct(t_global *global);							/**/
+	/*****************************************************************************/
+
+
+	/***[ INIT_MUTEX.C ] functions *******************************/
+	/**/void		ft_init_mutex(t_global *global);		  /**/
+	/***********************************************************/
+
 	
-	uint64_t				eating_time;
-	uint64_t				eat_count;
+	/***[ RUTINE.C ] functions ************************************/
+	/**/int			ft_create_threads(t_global *global); 	   /**/
+	/**/void		*ft_loop(void *values);					  /**/
+	/**/void		ft_rutine(t_philo *philo);		   		 /**/
+	/**********************************************************/
 
-	pthread_mutex_t			own_fork;
-	pthread_t				thread;
-
-	int			end;
-	int			index;
-
-}				t_philo;
-
-typedef struct 	s_global
-{
-	t_philo		*philo;
-	t_args		args;
-
-}							t_global;
-
-int		ft_isdigit(int c);
-int		ft_atoi(const char *str);
-
-int		ft_init_struct(t_global *global);
-int		ft_fill_struct(int argc, char **argv, t_global *global);
-
-void	ft_init_mutex(t_global *global);
-
-uint64_t	ft_get_time(uint64_t reference);
-void		ft_usleep(uint64_t time_in_ms);
-
-int		ft_create_threads(t_global *global);
-void	*ft_loop(void *values);
-void	ft_rutine(t_philo *philo);
-
-void	ft_take_a_fork(t_philo *philo);
-void	ft_show_condition(t_philo *philo, char *condition);
+	/***[ FT_EAT.C ] functions *************************************/
+	/**/void		ft_take_a_fork(t_philo *philo);				/**/
+	/**/void		ft_eat(t_philo *philo);					   /**/
+	/************************************************************/
 
 
-// Condition
-
-void	*ft_philo_dead(void *values);
-void	ft_eat(t_philo *philo);
-
+	void		ft_show_condition(t_philo *philo, char *condition);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 18:09:55 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 00:19:13 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/13 10:25:14 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,16 +33,11 @@ int	ft_init_struct(t_global *global)
 
 	i = 0;
 	global->args.start_time = ft_get_time(0);
-	global->args.meteorite = 0;
-	global->args.stop = 0;
 	ft_init_mutex(global);
 
 	while (i < global->args.total_philos)
 	{
 		pthread_mutex_init(&global->philo[i].own_fork, NULL);
-		global->philo[i].eating_time = global->args.start_time;
-		global->philo[i].eat_count = 0;
-		global->philo[i].end = 0;
 		global->philo[i].index = i + 1;
 		i++;
 	}
