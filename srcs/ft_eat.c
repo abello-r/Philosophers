@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/12 19:08:21 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 18:59:25 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/14 02:03:13 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ void	ft_eat(t_philo *philo)
 
 	pthread_mutex_lock(&philo->own_fork); // Bloquear mi tenedor [1]
 	ft_take_a_fork(philo); // [Imprime que ha cogido 1 tenedor]
+
+	if (philo->table->total_philos == 1)
+	{
+		pthread_mutex_lock(&philo->table->write_mutex);
+		printf(RED "[%llu ms]\t[Philo %d] Died\n" RESET, ft_get_time(philo->table->start_time), philo->index);
+		ft_usleep(philo->table->time_2_die);
+		pthread_mutex_unlock(&philo->table->write_mutex);
+		return ;
+	}
+
 	pthread_mutex_lock(&philo->table->philo[right_index].own_fork); // Bloquear tenedor del de la derecha [2]
 	ft_take_a_fork(philo); // [Imprime que ha cogido 2 tenedores]
 
@@ -42,14 +52,15 @@ void	ft_eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->own_fork); // Desbloquear tenedor [1]
 	pthread_mutex_unlock(&philo->table->philo[right_index].own_fork); // Desbloquear tenedor [2]
 
-	/*
-	Revisar si alguno ha muerto,
-	Controlar el right philo,
-	Escribir que tengo los dos tenedores„
-	Mutex lock del tenedor propio [1],
-	mutex lock del tenedor de la derecha [2],
-	Imprimir que he comido [tiempo recibido por parametro],
-	Esperar por el tiempo de [Time_to_eat],
-	han terminado de comer? soltar tenedores.
-	*/
+
+	/******************************************************************/
+	/**	Revisar si alguno ha muerto,								 **/
+	/**	Controlar el right philo,									 **/
+	/**	Escribir que tengo los dos tenedores,						 **/
+	/**	Mutex lock del tenedor propio [1],							 **/
+	/**	mutex lock del tenedor de la derecha [2],					 **/
+	/**	Imprimir que he comido [tiempo recibido por parametro],		 **/
+	/**	Esperar por el tiempo de [Time_to_eat],						 **/
+	/**	han terminado de comer? soltar tenedores.					 **/
+	/******************************************************************/
 }

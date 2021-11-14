@@ -6,27 +6,15 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 16:20:29 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 19:04:20 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/13 20:18:36 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "platon.h"
 
-void	ft_show_condition(t_philo *philo, char *condition)
-{
-	uint64_t time;
-
-	time = ft_get_time(0) - philo->table->start_time;
-	if (time >= 0 && time <= MAX_INT)
-	{
-		printf("[%llu] Philo [%d] %s", time, philo->index, condition);
-	}
-}
-
 void	*ft_loop(void *values)
 {
 	t_philo	*philo;
-
 	philo = (t_philo *)values;
 
 	if (philo->index % 2 == 0)
@@ -36,25 +24,19 @@ void	*ft_loop(void *values)
 	{
 		ft_eat(philo);
 
-		pthread_mutex_lock(&philo->table->write_mutex); // Bloquear mutex escritura
-		printf(YELLOW "[%llu ms]\t\t[Philo %d] Is sleeping\n" RESET, ft_get_time(philo->table->start_time), philo->index); // Escribir que tiene [1] tenedor y restar el tiempo inicial con el actual.
-		pthread_mutex_unlock(&philo->table->write_mutex); // Bloquear mutex escritura
-		ft_usleep(philo->table->time_2_sleep);
-		/*
-			mutex lock write
-			Imprimir mensaje de dormir
-			mutex unlock write
-			esperar tiempo que tarda en dormir [paramatro sleep]
-		*/
+		pthread_mutex_lock(&philo->table->write_mutex);					/**********************************/
+		printf(YELLOW "[%llu ms]\t\t[Philo %d] Is sleeping\n" RESET,	/* Mutex write bloqueado		 **/
+		ft_get_time(philo->table->start_time), philo->index);			/* Imprimir mensaje de dormir	 **/
+		pthread_mutex_unlock(&philo->table->write_mutex);				/* Mutex write desbloqueado		 **/
+		ft_usleep(philo->table->time_2_sleep);							/* Esperar tiempo dormir		 **/
+																		/**********************************/
 
-		pthread_mutex_lock(&philo->table->write_mutex); // Bloquear mutex escritura
-		printf(MAGN "[%llu ms]\t\t[Philo %d] Is thinking\n" RESET, ft_get_time(philo->table->start_time), philo->index); // Escribir que tiene [1] tenedor y restar el tiempo inicial con el actual.
-		pthread_mutex_unlock(&philo->table->write_mutex); // Bloquear mutex escritura
-		/*
-			mutex lock write
-			Imprimir mensaje de pensando
-			mutex unlock write
-		*/
+
+		pthread_mutex_lock(&philo->table->write_mutex);					/**********************************/
+		printf(MAGN "[%llu ms]\t\t[Philo %d] Is thinking\n" RESET,		/* Mutex write bloqueado		 **/
+		ft_get_time(philo->table->start_time), philo->index);			/* Imprimir mensaje de dormir	 **/
+		pthread_mutex_unlock(&philo->table->write_mutex);				/* Mutex write desbloqueado		 **/
+																		/**********************************/
 	}
 	return (0);
 }

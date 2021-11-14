@@ -132,7 +132,4 @@ typedef struct s_philo	t_philo;
 	/**/void		ft_eat(t_philo *philo);					   /**/
 	/************************************************************/
 
-
-	void		ft_show_condition(t_philo *philo, char *condition);
-
 #endif
