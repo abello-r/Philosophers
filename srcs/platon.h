@@ -75,6 +75,7 @@ typedef struct s_philo	t_philo;
 /**/		int				time_2_eat;					/**/
 /**/		int				time_2_sleep;				/**/
 /**/		int				limit_eat;					/**/
+/**/		int				is_dead;					/**/
 /**/													/**/
 /**/		t_philo			*philo;						/**/
 /**/		pthread_mutex_t write_mutex;				/**/
@@ -87,11 +88,12 @@ typedef struct s_philo	t_philo;
 /**/	typedef struct s_philo							/**/
 /**/	{												/**/
 /**/		t_table					*table;				/**/
+/**/		int						last_eat;			/**/
+/**/		int						index;				/**/
 /**/													/**/
 /**/		pthread_mutex_t			own_fork;			/**/
 /**/		pthread_t				thread;				/**/
 /**/													/**/
-/**/		int			index;							/**/
 /**/													/**/
 /**/	}				t_philo;						/**/
 /**********************************************************/
@@ -131,5 +133,8 @@ typedef struct s_philo	t_philo;
 	/**/void		ft_take_a_fork(t_philo *philo);				/**/
 	/**/void		ft_eat(t_philo *philo);					   /**/
 	/************************************************************/
+
+		void		ft_death(t_table *table);
+		int 		ft_msg(t_philo *philo, char status, int is_dead);
 
 #endif

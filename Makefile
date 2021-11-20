@@ -6,7 +6,9 @@ SRCS=	srcs/structs.c \
 		srcs/ft_eat.c \
 		srcs/time_utils.c \
 		srcs/rutine.c \
-		srcs/init_mutex.c
+		srcs/init_mutex.c \
+		srcs/printf_condition.c \
+		srcs/death.c
 
 OBJ= ${SRCS:.c=.o}
 

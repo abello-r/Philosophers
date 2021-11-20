@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 16:20:29 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 20:18:36 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/20 17:37:05 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	*ft_loop(void *values)
 	if (philo->index % 2 == 0)
 		usleep(1000);
 
-	while (1)
+	while (philo->table->is_dead == 0)
 	{
 		ft_eat(philo);
 
@@ -52,8 +52,9 @@ int	ft_create_threads(t_table *table)
 		pthread_create(&table->philo[i].thread, NULL, ft_loop, &table->philo[i]);
 		i++;
 	}
+	ft_death(table);
 	i = 0;
-	while (i < table->total_philos)
+	while (i < table->total_philos && table->is_dead == 0)
 	{
 		pthread_join(table->philo[i].thread, NULL);
 		i++;

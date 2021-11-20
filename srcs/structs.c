@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 18:09:55 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 18:35:54 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/19 21:47:32 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	ft_fill_struct(int argc, char **argv, t_table *table)
 	table->time_2_eat = ft_atoi(argv[3]);
 	table->time_2_sleep = ft_atoi(argv[4]);
 	table->limit_eat = -1;
+	table->is_dead = 0;
 	if (argc == 6)
 		table->limit_eat = ft_atoi(argv[5]);
 	if (table->total_philos <= 0 || table->time_2_die <= 0
@@ -39,6 +40,7 @@ int	ft_init_struct(t_table *table)
 	{
 		pthread_mutex_init(&table->philo[i].own_fork, NULL);
 		table->philo[i].index = i + 1;
+		table->philo[i].last_eat = 0;
 		i++;
 	}
 	return (1);
