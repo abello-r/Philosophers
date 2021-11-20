@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/16 19:34:29 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/20 17:37:35 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/21 00:35:17 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,15 @@ void    ft_death(t_table *table)
 			last_eat_time = (ft_get_time(table->start_time) - table->philo[i].last_eat);
 			if (last_eat_time >= table->time_2_die)
 			{
-				pthread_mutex_lock(&table->write_mutex);
-				printf(RED "[%d]\t\t[Philo %d] Died\n" RESET, table->time_2_die, table->philo->index);
-				pthread_mutex_unlock(&table->write_mutex);
+				ft_msg(table->philo, "dead");
 				table->is_dead = 1;
 				break ;
 			}
 			i++;
 		}
-		if (table->is_dead == 1)
+		if (table->is_dead == 1 || table->each_philo_eat == 1)
 			break ;
+
 		usleep(100);
 	}
 }

@@ -14,7 +14,7 @@ OBJ= ${SRCS:.c=.o}
 
 CC = gcc
 RM = rm -rf
-CFLAGS = -Wall -Werror -Wextra -g3 -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra #-g3 -fsanitize=address
 
 .c.o:
 		${CC} ${CFLAGS} -c $< -o ${<:.c=.o}

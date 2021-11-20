@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/04 16:20:29 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/20 17:37:05 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/21 00:34:12 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,18 @@ void	*ft_loop(void *values)
 	{
 		ft_eat(philo);
 
-		pthread_mutex_lock(&philo->table->write_mutex);					/**********************************/
-		printf(YELLOW "[%llu ms]\t\t[Philo %d] Is sleeping\n" RESET,	/* Mutex write bloqueado		 **/
-		ft_get_time(philo->table->start_time), philo->index);			/* Imprimir mensaje de dormir	 **/
-		pthread_mutex_unlock(&philo->table->write_mutex);				/* Mutex write desbloqueado		 **/
-		ft_usleep(philo->table->time_2_sleep);							/* Esperar tiempo dormir		 **/
-																		/**********************************/
+		if (philo->counter_eat == philo->table->limit_eat)
+		{
+			philo->table->each_philo_eat = 1;
+			break ;
+		}
 
+		ft_msg(philo, "sleep");
+		ft_usleep(philo->table->time_2_sleep);
 
-		pthread_mutex_lock(&philo->table->write_mutex);					/**********************************/
-		printf(MAGN "[%llu ms]\t\t[Philo %d] Is thinking\n" RESET,		/* Mutex write bloqueado		 **/
-		ft_get_time(philo->table->start_time), philo->index);			/* Imprimir mensaje de dormir	 **/
-		pthread_mutex_unlock(&philo->table->write_mutex);				/* Mutex write desbloqueado		 **/
-																		/**********************************/
+		ft_msg(philo, "think");
+		pthread_mutex_unlock(&philo->table->write_mutex);
+
 	}
 	return (0);
 }

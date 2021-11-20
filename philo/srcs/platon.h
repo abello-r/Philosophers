@@ -56,13 +56,15 @@
 # define BLUE "\033[1;34m"
 # define YELLOW "\033[1;33m"
 # define MAGN "\033[1;35m"
-# define RESET "\033[0m"
+# define WHT "\033[1;38m"
+# define RESET "\033[1m"
 
 /** Arguments Error **/
 # define LARG "\nInvalid Arguments\n\n"
 # define NARG "\nThe number of philos cannot be 0\n\n"
 # define MARG "\nThe number of philos cannot be major than 200\n\n"
 # define PARSE "\nInvalid Character\n\n"
+# define LESS "\nData cannot be less than 60\n\n"
 
 typedef struct s_philo	t_philo;
 
@@ -76,6 +78,7 @@ typedef struct s_philo	t_philo;
 /**/		int				time_2_sleep;				/**/
 /**/		int				limit_eat;					/**/
 /**/		int				is_dead;					/**/
+/**/		int				each_philo_eat;				/**/
 /**/													/**/
 /**/		t_philo			*philo;						/**/
 /**/		pthread_mutex_t write_mutex;				/**/
@@ -89,6 +92,7 @@ typedef struct s_philo	t_philo;
 /**/	{												/**/
 /**/		t_table					*table;				/**/
 /**/		int						last_eat;			/**/
+/**/		int						counter_eat;		/**/
 /**/		int						index;				/**/
 /**/													/**/
 /**/		pthread_mutex_t			own_fork;			/**/
@@ -100,10 +104,11 @@ typedef struct s_philo	t_philo;
 
 
 
-	/***[ MINI_LIBFT.C ] functions ****************************/
-	/**/int			ft_atoi(const char *str);    	 	   /**/
-	/**/int			ft_isdigit(int c);				      /**/
-	/*******************************************************/
+	/***[ MINI_LIBFT.C ] functions ***************************/
+	/**/int			ft_atoi(const char *str);    	 	  /**/
+	/**/int			ft_isdigit(int c);				     /**/
+	/**/int			ft_strcmp(char *s1, char *s2);		/**/
+	/*****************************************************/
 
 
 	/***[ TIME_UTILS.C ] functions ********************************/
@@ -130,11 +135,10 @@ typedef struct s_philo	t_philo;
 	/**********************************************************/
 
 	/***[ FT_EAT.C ] functions *************************************/
-	/**/void		ft_take_a_fork(t_philo *philo);				/**/
 	/**/void		ft_eat(t_philo *philo);					   /**/
 	/************************************************************/
 
 		void		ft_death(t_table *table);
-		int 		ft_msg(t_philo *philo, char status, int is_dead);
+		int 		ft_msg(t_philo *philo, char *status);
 
 #endif

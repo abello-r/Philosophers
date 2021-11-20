@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 15:55:56 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 18:11:11 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/21 00:46:59 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ int	main(int argc, char **argv)
 		if (ft_parse(argc, argv) == -1)
 			return (-1);
 
-	ft_fill_struct(argc, argv, &table);
+	if (ft_fill_struct(argc, argv, &table) == 1)
+		return (1);
 
 // Create struct x philo-------------------------------
 
@@ -74,6 +75,6 @@ int	main(int argc, char **argv)
 
 	ft_init_struct(&table);
 	ft_create_threads(&table);
-
+	free(table.philo);
 	return (0);
 }
