@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 15:55:56 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/21 00:46:59 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/21 11:07:25 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ int	main(int argc, char **argv)
 {
 	t_table	table;
 
-// Parse finish --------------------------------------
-
 	if (argc < 5 || argc > 6)
 	{
 		write(1, RED LARG, (sizeof(LARG) + sizeof(RED) - 2));
@@ -62,17 +60,11 @@ int	main(int argc, char **argv)
 	else if (argc == 5 || argc == 6)
 		if (ft_parse(argc, argv) == -1)
 			return (-1);
-
 	if (ft_fill_struct(argc, argv, &table) == 1)
 		return (1);
-
-// Create struct x philo-------------------------------
-
 	table.philo = malloc(sizeof(t_philo) * ft_atoi(argv[1]));
-
 	if (!table.philo)
 		return (1);
-
 	ft_init_struct(&table);
 	ft_create_threads(&table);
 	free(table.philo);

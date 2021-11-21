@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 16:21:20 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/20 17:56:15 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/21 00:56:22 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_atoi(const char *str)
 
 static void	*ft_memset(void *b, int c, size_t len)
 {
-	size_t i;
+	size_t	i;
 
 	i = 0;
 	while (i < len)
@@ -65,13 +65,13 @@ void	ft_bzero(void *s, size_t n)
 int	ft_strcmp(char *s1, char *s2)
 {
 	int	i;
-	int x;
+	int	x;
 
 	i = 0;
 	x = 0;
 	while (s1[i] != '\0')
 		i++;
-	while (s2[x] !=  '\0')
+	while (s2[x] != '\0')
 		x++;
 	if (x != i)
 		return (1);

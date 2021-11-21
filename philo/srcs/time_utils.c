@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:24:15 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/13 18:58:47 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/21 01:08:16 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_usleep(uint64_t time_in_ms)
 {
-	uint64_t			start_time;
+	uint64_t	start_time;
 
 	start_time = ft_get_time(0);
 	while ((ft_get_time(0) - start_time) < time_in_ms)
@@ -23,9 +23,9 @@ void	ft_usleep(uint64_t time_in_ms)
 
 uint64_t	ft_get_time(uint64_t reference)
 {
-	struct	timeval ti;
+	struct timeval	ti;
 
 	if (gettimeofday(&ti, NULL) == -1)
 		return (-1);
-	return(ti.tv_sec * 1000 + ti.tv_usec / 1000 - reference);
+	return (ti.tv_sec * 1000 + ti.tv_usec / 1000 - reference);
 }

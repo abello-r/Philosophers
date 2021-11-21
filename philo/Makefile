@@ -28,6 +28,8 @@ all:	${NAME}
 clean:
 		@echo "\n\033[32mJunk files deleted\n"
 		@${RM} ${OBJS} philo.dSYM
+		@${RM} ${NAME}
+		@${RM} srcs/*.o
 
 fclean:	clean
 		@${RM} ${NAME}

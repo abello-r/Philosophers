@@ -6,7 +6,7 @@
 /*   By: abello-r <abello-r@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/28 18:09:55 by abello-r          #+#    #+#             */
-/*   Updated: 2021/11/21 00:25:54 by abello-r         ###   ########.fr       */
+/*   Updated: 2021/11/21 01:04:57 by abello-r         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ int	ft_init_struct(t_table *table)
 	i = 0;
 	table->start_time = ft_get_time(0);
 	ft_init_mutex(table);
-
 	while (i < table->total_philos)
 	{
 		pthread_mutex_init(&table->philo[i].own_fork, NULL);
